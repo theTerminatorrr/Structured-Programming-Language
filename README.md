@@ -1,1 +1,1 @@
-# Basic-C-Codes-
+Hello Programmers! Hope you all are doing well. I'm Jahidul Islam Jony. I'm a from United International University Dhaka - Banglasdesh. As a Computer Science student I just completed learning C language. Here is all of my C codes which I have done while learning C Programming. If you want to see the basic syntax of C and some programs of Structural Programming then follow these codes. It will help you to improve your coding skills. Thank you Guysss!
