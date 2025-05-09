@@ -1,0 +1,48 @@
+/* Write a C program that reads integers from a file called 'input.txt', calculates the sum of these
+ integers, and writes the sum to a file called 'output.txt'. If the file 'input.txt' does not exist, print an
+ appropriate error message.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    FILE *inputFile, *outputFile;
+    int number, sum = 0;
+
+    // Open the input file for reading
+    inputFile = fopen("input.txt", "r");
+    if (inputFile == NULL)
+    {
+        // Print an error message if the file does not exist
+        perror("Error opening input file");
+        return EXIT_FAILURE;
+    }
+
+    // Read integers from the input file and calculate the sum
+    while (fscanf(inputFile, "%d", &number) == 1)
+    {
+        sum += number;
+    }
+
+    // Close the input file
+    fclose(inputFile);
+
+    // Open the output file for writing
+    outputFile = fopen("output.txt", "w");
+    if (outputFile == NULL)
+    {
+        // Print an error message if the file cannot be opened
+        perror("Error opening output file");
+        return EXIT_FAILURE;
+    }
+
+    // Write the sum to the output file
+    fprintf(outputFile, "Sum: %d\n", sum);
+
+    // Close the output file
+    fclose(outputFile);
+
+    printf("Sum has been written to output.txt\n");
+    return EXIT_SUCCESS;
+}
