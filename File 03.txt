@@ -1,0 +1,53 @@
+/*Write a C program that reads a list of student names and their grades from a file 'students.txt' where
+ each line contains a name followed by a grade. The program should print the name and grade of the
+ student with the highest grade.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_NAME_LENGTH 100
+
+int main()
+{
+    FILE *file;
+    char name[MAX_NAME_LENGTH];
+    int grade, highestGrade = -1;
+    char topStudent[MAX_NAME_LENGTH];
+
+    // Open the students.txt file for reading
+    file = fopen("students.txt", "r");
+    if (file == NULL)
+    {
+        // Print an error message if the file does not exist
+        perror("Error opening students.txt");
+        return 1;  // Return a non-zero value to indicate error
+    }
+
+    // Read student names and grades from the file
+    while (fscanf(file, "%99s %d", name, &grade) == 2)
+    {
+        // Check if the current grade is higher than the highest grade found so far
+        if (grade > highestGrade)
+        {
+            highestGrade = grade;
+            strcpy(topStudent, name);  // Update the top student's name
+        }
+    }
+
+    // Close the file
+    fclose(file);
+
+    // Check if we found any students
+    if (highestGrade != -1)
+    {
+        printf("Student with the highest grade:\n");
+        printf("Name: %s, Grade: %d\n", topStudent, highestGrade);
+    }
+    else
+    {
+        printf("No student data found.\n");
+    }
+
+    return 0;  // Return 0 to indicate successful execution
+}
