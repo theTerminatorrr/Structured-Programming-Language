@@ -1,0 +1,80 @@
+/* Write a C program that reads a list of integers from 'numbers.txt', sorts them in ascending order, and
+ writes the sorted list to a file named 'sorted_numbers.txt'. If the file 'numbers.txt' does not exist, print
+ an error message.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_NUMBERS 1000  // Define maximum number of integers to read
+
+void sort(int arr[], int n)
+{
+    // Simple bubble sort implementation
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                // Swap arr[j] and arr[j + 1]
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main()
+{
+    FILE *inputFile, *outputFile;
+    int numbers[MAX_NUMBERS];
+    int count = 0;
+
+    // Open the numbers.txt file for reading
+    inputFile = fopen("numbers.txt", "r");
+    if (inputFile == NULL)
+    {
+        // Print an error message if the file does not exist
+        perror("Error opening numbers.txt");
+        return 1;  // Return a non-zero value to indicate error
+    }
+
+    // Read integers from the input file
+    while (fscanf(inputFile, "%d", &numbers[count]) == 1)
+    {
+        count++;
+        if (count >= MAX_NUMBERS)
+        {
+            printf("Warning: Maximum number of integers exceeded. Only the first %d numbers will be sorted.\n", MAX_NUMBERS);
+            break;  // Stop reading if maximum size is reached
+        }
+    }
+
+    // Close the input file
+    fclose(inputFile);
+
+    // Sort the array of numbers
+    sort(numbers, count);
+
+    // Open the sorted_numbers.txt file for writing
+    outputFile = fopen("sorted_numbers.txt", "w");
+    if (outputFile == NULL)
+    {
+        // Print an error message if the file cannot be opened
+        perror("Error opening sorted_numbers.txt");
+        return 1;  // Return a non-zero value to indicate error
+    }
+
+    // Write the sorted numbers to the output file
+    for (int i = 0; i < count; i++)
+    {
+        fprintf(outputFile, "%d\n", numbers[i]);
+    }
+
+    // Close the output file
+    fclose(outputFile);
+
+    printf("Sorted numbers have been written to sorted_numbers.txt\n");
+    return 0;  // Return 0 to indicate successful execution
+}
