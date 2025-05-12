@@ -1,0 +1,74 @@
+/* Write a C program that reads a matrix of integers from a file named 'matrix.txt'. The program should
+ then transpose the matrix and write the transposed matrix to a file named 'transposed_matrix.txt'.
+ Assume the first line of the file contains two integers representing the number of rows and columns.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 100
+
+int main()
+{
+    FILE *inputFile, *outputFile;
+    int matrix[MAX_SIZE][MAX_SIZE];
+    int transposed[MAX_SIZE][MAX_SIZE];
+    int rows, cols;
+
+    // Open the matrix.txt file for reading
+    inputFile = fopen("matrix.txt", "r");
+    if (inputFile == NULL)
+    {
+        // Print an error message if the file does not exist
+        perror("Error opening matrix.txt");
+        return 1;  // Return a non-zero value to indicate error
+    }
+
+    // Read the dimensions of the matrix
+    fscanf(inputFile, "%d %d", &rows, &cols);
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            fscanf(inputFile, "%d", &matrix[i][j]);
+        }
+    }
+
+    fclose(inputFile);
+
+    // Transpose the matrix
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            transposed[j][i] = matrix[i][j];
+        }
+    }
+
+    // Open the transposed_matrix.txt file for writing
+    outputFile = fopen("transposed_matrix.txt", "w");
+    if (outputFile == NULL)
+    {
+        // Print an error message if the file cannot be opened
+        perror("Error opening transposed_matrix.txt");
+        return 1;  
+    }
+
+    fprintf(outputFile, "%d %d\n", cols, rows);
+
+    // Write the transposed matrix to the output file
+    for (int i = 0; i < cols; i++)
+    {
+        for (int j = 0; j < rows; j++)
+        {
+            fprintf(outputFile, "%d ", transposed[i][j]);
+        }
+        fprintf(outputFile, "\n");
+    }
+
+    // Close the output file
+    fclose(outputFile);
+
+    printf("Transposed matrix has been written to transposed_matrix.txt\n");
+    return 0;  
+}
