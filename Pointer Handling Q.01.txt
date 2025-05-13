@@ -1,0 +1,17 @@
+/*Write a C program that declares an integer variable 'num' and initializes it with 5. Declare a pointer
+variable and assign the address of 'num' to it. Use the pointer to increment the value of 'num' by 10.
+Print the value of 'num' using both the pointer and the variable itself.*/
+
+#include <stdio.h>
+int main()
+{
+    int num = 5;
+    int *ptr = &num;
+
+    *ptr += 10;
+
+    printf("Using variable: %d\n", num);
+    printf("Using pointer: %d\n", *ptr);
+
+    return 0;
+}
