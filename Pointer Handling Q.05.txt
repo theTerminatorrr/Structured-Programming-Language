@@ -1,0 +1,52 @@
+/* Write a C program that takes two strings as input and uses pointers to concatenate them. Print the
+ concatenated string.*/
+
+#include <stdio.h>
+void concatenate(char *str1, char *str2)
+{
+    while (*str1 != '\0')
+    {
+        str1++;
+    }
+    while (*str2 != '\0')
+    {
+        *str1 = *str2;  // Copy character from str2 to str1
+        str1++;
+        str2++;
+    }
+
+    *str1 = '\0';  // Null-terminate the concatenated string
+}
+
+int main()
+{
+    char str1[100], str2[100];  // Arrays to store the input strings
+
+    printf("Enter the first string: ");
+    fgets(str1, sizeof(str1), stdin);
+
+    for (int i = 0; str1[i] != '\0'; i++)
+    {
+        if (str1[i] == '\n')
+        {
+            str1[i] = '\0';
+        }
+    }
+
+    printf("Enter the second string: ");
+    fgets(str2, sizeof(str2), stdin);
+
+    for (int i = 0; str2[i] != '\0'; i++)
+    {
+        if (str2[i] == '\n')
+        {
+            str2[i] = '\0';
+        }
+    }
+
+    concatenate(str1, str2);
+
+    printf("Concatenated string: %s\n", str1);
+
+    return 0;
+}
