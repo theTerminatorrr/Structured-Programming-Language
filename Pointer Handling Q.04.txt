@@ -1,0 +1,43 @@
+/*Write a C program that declares a 2D array of integers and uses a pointer to find the maximum
+value in the array. Print the maximum value and its position (row and column) in the array.*/
+
+#include <stdio.h>
+int main()
+{
+    int rows, cols;
+    
+    printf("Enter the number of rows and columns: ");
+    scanf("%d %d", &rows, &cols);
+
+    int arr[rows][cols];
+
+    printf("Enter the elements of the array:\n");
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            scanf("%d", &arr[i][j]);
+        }
+    }
+
+    int max = arr[0][0];
+    int maxRow = 0, maxCol = 0;
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            if (arr[i][j] > max)
+            {
+                max = arr[i][j];
+                maxRow = i;
+                maxCol = j;
+            }
+        }
+    }
+
+    printf("Maximum value: %d\n", max);
+    printf("Position: (%d, %d)\n", maxRow, maxCol);
+
+    return 0;
+}
