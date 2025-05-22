@@ -1,0 +1,47 @@
+/*Write a C program that defines a structure 'Rectangle' with members length and breadth. Write a
+ function to calculate the area of the rectangle using a pointer to the structure. Take input for 3
+ rectangles and display the rectangle with the largest area.*/
+
+#include <stdio.h>
+struct Rectangle
+{
+    int length;
+    int breadth;
+};
+
+// Function to calculate the area of a rectangle using a pointer to the structure
+int calculateArea(struct Rectangle *rect)
+{
+    return rect->length * rect->breadth;
+}
+
+int main()
+{
+    struct Rectangle rects[3];
+    int maxArea = 0;
+    int maxIndex = 0;
+
+    for (int i = 0; i < 3; i++)
+    {
+        printf("Enter the length and breadth of rectangle %d:\n", i + 1);
+        scanf("%d %d", &rects[i].length, &rects[i].breadth);
+    }
+
+    // Calculate the area of each rectangle and find the one with the largest area
+    for (int i = 0; i < 3; i++)
+    {
+        int area = calculateArea(&rects[i]);
+        printf("Area of rectangle %d: %d\n", i + 1, area);
+
+        if (area > maxArea)
+        {
+            maxArea = area;
+            maxIndex = i;  // Update the index of the rectangle with the largest area
+        }
+    }
+
+    printf("\nThe rectangle with the largest area is rectangle %d with area %d.\n", maxIndex + 1, maxArea);
+    printf("Dimensions: Length = %d, Breadth = %d\n", rects[maxIndex].length, rects[maxIndex].breadth);
+
+    return 0;
+}
