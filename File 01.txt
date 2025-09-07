@@ -2,6 +2,7 @@
  integers, and writes the sum to a file called 'output.txt'. If the file 'input.txt' does not exist, print an
  appropriate error message.*/
 
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -46,3 +47,4 @@ int main()
     printf("Sum has been written to output.txt\n");
     return EXIT_SUCCESS;
 }
+
