@@ -17,8 +17,10 @@ int main()
         a = b;
         b = r;
     }
+    
     printf("GCD = %d\n",a);
 
     return 0;
 }
+
 
